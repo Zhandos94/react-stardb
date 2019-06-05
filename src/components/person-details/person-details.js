@@ -13,7 +13,9 @@ export default class PersonDetails extends Component {
     componentDidMount() {
         this.personUpdate();
     }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('componentDidUpdate')
         if(this.props.personId !== prevProps.personId) {
             this.personUpdate();
         }
@@ -31,6 +33,8 @@ export default class PersonDetails extends Component {
     }
 
     render() {
+        console.log('render')
+
         if(!this.state.person) return <span>Select a person from list</span>;
         const {id, name, gender, birthDate, eyeColor} = this.state.person;
 
