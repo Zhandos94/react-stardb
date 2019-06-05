@@ -7,8 +7,18 @@ import SwapiService from "../../service/swapi-service";
 
 export default class App extends Component {
 
+   state = {
+       selectedPerson: 4,
+   };
+
     swapiService = new SwapiService();
 
+    onPersonSelected = (id) => {
+        console.log(id);
+        this.setState({
+            selectedPerson: id
+        })
+    };
 
     render() {
         return (
@@ -18,10 +28,10 @@ export default class App extends Component {
 
                 <div className="row">
                     <div className="col-12 col-lg-6">
-                        <ItemList getData={this.swapiService.getAllPeople} />
+                        <ItemList getData={this.swapiService.getAllPeople} onItemSelected={this.onPersonSelected}/>
                     </div>
                     <div className="col-12 col-lg-6">
-                        <PersonDetails/>
+                        <PersonDetails personId={this.state.selectedPerson}/>
                     </div>
                 </div>
 
