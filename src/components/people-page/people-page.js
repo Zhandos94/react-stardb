@@ -4,40 +4,9 @@ import PersonDetails from '../person-details/person-details';
 import ErrorIndicator from '../error/error';
 import './people-page.css';
 import SwapiService from "../../service/swapi-service";
+import Row from "../row";
+import ErrorBoundry from "../error-boundry";
 
-const Row = ({left, right}) => {
-    console.log(left);
-    return (
-        <div className="row mb2">
-            <div className="col-md-6">
-                {left}
-            </div>
-            <div className="col-md-6">
-                {right}
-            </div>
-        </div>
-    );
-};
-
-class ErrorBoundry extends Component {
-    state = {
-        hasError: false
-    };
-
-    componentDidCatch(error, info) {
-        this.setState({
-            hasError: true
-        });
-    }
-
-    render() {
-        if (this.state.hasError) {
-            return <ErrorIndicator/>;
-        }
-
-        return ( this.props.children);
-    }
-}
 export default class PeoplePage extends Component {
 
     swapiService = new SwapiService();
