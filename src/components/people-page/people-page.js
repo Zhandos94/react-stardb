@@ -19,6 +19,25 @@ const Row = ({left, right}) => {
     );
 };
 
+class ErrorBoundry extends Component {
+    state = {
+        hasError: false
+    };
+
+    componentDidCatch(error, info) {
+        this.setState({
+            hasError: true
+        });
+    }
+
+    render() {
+        if (this.state.hasError) {
+            return <ErrorIndicator/>;
+        }
+
+        return ( this.props.children);
+    }
+}
 export default class PeoplePage extends Component {
 
     swapiService = new SwapiService();
@@ -54,10 +73,13 @@ export default class PeoplePage extends Component {
             </ItemList>
         );
 
-        const personDetails = <PersonDetails personId={this.state.selectedPerson}/>;
+        const personDetails = (
+            <ErrorBoundry>
+                <PersonDetails personId={this.state.selectedPerson}/>
+            </ErrorBoundry>);
 
         return (
-            <Row left={itemList} right={personDetails}/>
+              <Row left={itemList} right={personDetails}/>
         );
 
     }
