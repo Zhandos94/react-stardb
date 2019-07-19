@@ -4,8 +4,9 @@ import RandomPlanet from '../random-planet';
 import PeoplePage from "../people-page";
 import Row from "../row";
 import ErrorBoundry from "../error-boundry";
-import ItemDetails, { Record } from "../item-details/item-details";
+import ItemDetails from "../item-details/item-details";
 import SwapiService from "../../service/swapi-service";
+import Record from "../record";
 
 export default class App extends Component {
 
@@ -19,6 +20,7 @@ export default class App extends Component {
                 itemId={11}
                 getData={getPerson}
                 getImageUrl={getPersonImage}>
+
                 <Record field="gender" label="Gender" />
                 <Record field="eyeColor" label="Eye color" />
 
@@ -29,8 +31,11 @@ export default class App extends Component {
                 itemId={5}
                 getData={getStarship}
                 getImageUrl={getStarshipImage}>
-                <Record field="gender" label="Gender" />
-                <Record field="eyeColor" label="Eye color" />
+
+                <Record field="model" label="Model" />
+                <Record field="length" label="Length" />
+                <Record field="costInCredits" label="Cost" />
+
             </ItemDetails>);
 
         return (
@@ -39,7 +44,7 @@ export default class App extends Component {
                     <Header/>
                     <RandomPlanet/>
 
-                    {/*<PeoplePage />*/}
+                    <PeoplePage />
 
                     <Row left={startshipDetails} right={personDetails}/>
 
