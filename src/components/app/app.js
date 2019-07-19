@@ -7,6 +7,12 @@ import ErrorBoundry from "../error-boundry";
 import ItemDetails from "../item-details/item-details";
 import SwapiService from "../../service/swapi-service";
 import Record from "../record";
+import {
+    PersonList,
+    PlanetList,
+    StarhipList,
+} from '../sw-component';
+import ItemList from "../item-list";
 
 export default class App extends Component {
 
@@ -44,9 +50,20 @@ export default class App extends Component {
                     <Header/>
                     <RandomPlanet/>
 
-                    <PeoplePage />
+                    <PersonList>
+                        {({name}) => <span>{name}</span>}
+                    </PersonList>
 
-                    <Row left={startshipDetails} right={personDetails}/>
+                    <PlanetList>
+                        {({name}) => <span>{name}</span>}
+                    </PlanetList>
+
+                    <StarhipList>
+                        {({name}) => <span>{name}</span>}
+                    </StarhipList>
+
+                    {/*<PeoplePage />*/}
+                    {/*<Row left={startshipDetails} right={personDetails}/>*/}
 
                 </div>
             </ErrorBoundry>
