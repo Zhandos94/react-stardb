@@ -36,7 +36,7 @@ export default class ItemDetails extends Component {
     render() {
         const {item, image} = this.state;
         if(!this.state.item) return <span>Select a item from list</span>;
-        const {id, name } = item;
+        const { name } = item;
 
         return (
             <div className="item-details card">
