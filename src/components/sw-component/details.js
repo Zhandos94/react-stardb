@@ -7,7 +7,9 @@ const swapiServie = new SwapiService();
 
 const {getPerson, getPlanet, getStarship, getPersonImage, getPlanetImage, getStarshipImage} = swapiServie;
 
-const PersonDetails = (itemId) => {
+const PersonDetails = ({itemId}) => {
+    console.info(itemId);
+
     return (
         <ItemDetails
             itemId={itemId}
@@ -21,7 +23,7 @@ const PersonDetails = (itemId) => {
     );
 };
 
-const PlanetDetails = (itemId) => {
+const PlanetDetails = ({itemId}) => {
     return (
         <ItemDetails
             itemId={itemId}
@@ -36,7 +38,7 @@ const PlanetDetails = (itemId) => {
     );
 };
 
-const StartshipDetails = (itemId) => {
+const StartshipDetails = ({itemId}) => {
     return (
         <ItemDetails
             itemId={itemId}
