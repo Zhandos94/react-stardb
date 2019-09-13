@@ -1,3 +1,7 @@
 import WithData from './hoc-helper';
+import withSwapiService from './with-swapi-service';
 
-export default WithData;
+export {
+    WithData,
+    withSwapiService
+};
