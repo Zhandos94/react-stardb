@@ -16,16 +16,30 @@ import DummySwapiService from "../../service/dummy-swapi-service";
 
 export default class App extends Component {
 
-    swapiService = new SwapiService();
+    state = {
+        swapiService: new DummySwapiService()
+    };
+
+    onServiceChange = () => {
+        this.setState(({swapiService}) => {
+            const Service = swapiService instanceof  SwapiService ? DummySwapiService : SwapiService;
+
+            console.log(Service.name);
+
+            return {
+                swapiService: new Service
+            }
+        });
+    };
 
     render() {
         return (
             <ErrorBoundry>
-                <SwapiServiceProvider value={this.swapiService}>
+                <SwapiServiceProvider value={this.state.swapiService}>
 
                     <div className="stardb-app">
 
-                        <Header/>
+                        <Header onServiceChange={this.onServiceChange}/>
 
                         <RandomPlanet/>
 

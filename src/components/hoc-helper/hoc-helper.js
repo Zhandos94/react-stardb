@@ -1,4 +1,4 @@
-import React, {Component} from  'react';
+import React, {Component} from 'react';
 import Spinner from "../spinner";
 
 const WithData = (View) => {
@@ -7,8 +7,18 @@ const WithData = (View) => {
             data: null
         };
 
+        componentDidUpdate(prevProps, prevState, snapshot) {
+            if (this.props.getData !== prevProps.getData) {
+                this.update();
+            }
+        }
+
         componentDidMount() {
-           this.props.getData()
+            this.update();
+        }
+
+        update() {
+            this.props.getData()
                 .then((data) => {
                     this.setState({
                         data
