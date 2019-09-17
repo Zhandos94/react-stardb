@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import Spinner from "../spinner";
+import Error from "../error";
 
-const WithData = (View) => {
+const withData = (View) => {
     return class extends Component {
         state = {
-            data: null
+            data: null,
+            loading: true,
+            error: false
         };
 
         componentDidUpdate(prevProps, prevState, snapshot) {
@@ -15,6 +18,10 @@ const WithData = (View) => {
 
         componentDidMount() {
             this.update();
+
+            this.setState({
+                loading: true,
+            })
         }
 
         update() {
@@ -23,11 +30,20 @@ const WithData = (View) => {
                     this.setState({
                         data
                     });
+                }).catch(() => {
+                    this.setState({
+                        loading: false,
+                        error: true
+                    })
                 });
         }
 
         render() {
-            const {data} = this.state;
+            const {data, error} = this.state;
+
+            if (error) {
+                return <Error/>;
+            }
 
             if (!data) {
                 return <Spinner/>;
@@ -38,4 +54,4 @@ const WithData = (View) => {
     }
 };
 
-export default WithData;
+export default withData;

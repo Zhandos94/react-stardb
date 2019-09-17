@@ -2,32 +2,23 @@ import React, {Component} from 'react';
 import Header from '../header';
 import RandomPlanet from '../random-planet';
 import ErrorBoundry from "../error-boundry";
-
-import {
-    PersonList,
-    PlanetList,
-    StarhipList,
-    PersonDetails, PlanetDetails, StartshipDetails,
-} from '../sw-component';
-
 import {SwapiServiceProvider} from "../swapi-service-context";
 import SwapiService from "../../service/swapi-service";
 import DummySwapiService from "../../service/dummy-swapi-service";
+import {PeoplePage, PlanetPage, StarshipPage} from "../pages";
 
 export default class App extends Component {
 
     state = {
-        swapiService: new DummySwapiService()
+        swapiService: new SwapiService()
     };
 
     onServiceChange = () => {
         this.setState(({swapiService}) => {
-            const Service = swapiService instanceof  SwapiService ? DummySwapiService : SwapiService;
-
-            console.log(Service.name);
+            const Service = swapiService instanceof SwapiService ? DummySwapiService : SwapiService;
 
             return {
-                swapiService: new Service
+                swapiService: new Service()
             }
         });
     };
@@ -43,20 +34,11 @@ export default class App extends Component {
 
                         <RandomPlanet/>
 
-                        <PersonDetails itemId={11}/>
+                        <PeoplePage/>
 
-                        <PlanetDetails itemId={5}/>
+                        <PlanetPage/>
 
-                        <StartshipDetails itemId={9}/>
-
-                        <PersonList/>
-
-                        <PlanetList/>
-
-                        <StarhipList/>
-
-
-                        {/*<Row left={startshipDetails} right={personDetails}/>*/}
+                        <StarshipPage/>
 
                     </div>
 

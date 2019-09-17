@@ -13,11 +13,10 @@ export default class ItemDetails extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.props.personId !== prevProps.personId ||
+        if(this.props.itemId !== prevProps.itemId ||
             this.props.getData !== prevProps.getData ||
             this.props.getImageUrl !== prevProps.getImageUrl
         ) {
-            console.log( this.props);
             this.updateItem();
         }
     }
@@ -26,7 +25,6 @@ export default class ItemDetails extends Component {
         const {itemId, getData, getImageUrl} = this.props;
 
         if (!itemId) return false;
-
 
         getData(itemId)
             .then((item) => {
