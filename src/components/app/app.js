@@ -32,7 +32,7 @@ export default class App extends Component {
 
                         <Header onServiceChange={this.onServiceChange}/>
 
-                        <RandomPlanet/>
+                        <RandomPlanet updateInterval ={2000} />
 
                         <PeoplePage/>
 
