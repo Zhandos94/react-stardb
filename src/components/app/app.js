@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 import Header from '../header';
 import RandomPlanet from '../random-planet';
 import ErrorBoundry from "../error-boundry";
-import {SwapiServiceProvider} from "../swapi-service-context";
 import SwapiService from "../../service/swapi-service";
 import DummySwapiService from "../../service/dummy-swapi-service";
+import {SwapiServiceProvider} from "../swapi-service-context";
 import {PeoplePage, PlanetPage, StarshipPage} from "../pages";
+import {BrowserRouter as Router, Route} from "react-router-dom";
+import StarshipDetails from "../sw-component/starship-details";
 
 export default class App extends Component {
 
@@ -28,19 +30,31 @@ export default class App extends Component {
             <ErrorBoundry>
                 <SwapiServiceProvider value={this.state.swapiService}>
 
-                    <div className="stardb-app">
+                    <Router>
+                        <div className="stardb-app">
 
-                        <Header onServiceChange={this.onServiceChange}/>
+                            <Header onServiceChange={this.onServiceChange}/>
 
-                        <RandomPlanet updateInterval ={2000} />
+                            <RandomPlanet updateInterval={2000}/>
 
-                        <PeoplePage/>
+                            <Route
+                                path="/"
+                                render={() => <h2>Welcome to StartDB</h2>}
+                                exact
+                            />
+                            <Route path="/people" component = {PeoplePage}/>
+                            <Route path="/planet" component = {PlanetPage}/>
+                            <Route path="/starship" exact component = {StarshipPage}/>
+                            <Route
+                                path="/starship/:id"
+                                render = {({match}) => {
+                                    const {id} = match.params;
 
-                        <PlanetPage/>
+                                    return <StarshipDetails itemId={id}/>
+                                }}/>
 
-                        <StarshipPage/>
-
-                    </div>
+                        </div>
+                    </Router>
 
                 </SwapiServiceProvider>
             </ErrorBoundry>
